@@ -8,11 +8,6 @@ namespace Calculator
     {
         private readonly ICalcParser parser;
         private readonly IEvaluator evaluator;
-
-        public Calculator() : this(new StringParser(), new PostfixEvaluator())
-        {
-            
-        }
         
         public Calculator(ICalcParser parser, IEvaluator evaluator)
         {
