@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Calculator.Parser;
+using Calculator.ExpressionElements;
 
 namespace Calculator.Evaluator
 {
     public interface IEvaluator
     {
-        double Evaluate(MathExpression expression);
+        Number Evaluate(MathExpression expression);
     }
 }
