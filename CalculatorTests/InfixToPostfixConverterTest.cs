@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Calculator.Converter;
 using Calculator;
+using Calculator.ExpressionElements;
+using Calculator.ExpressionElements.Operators;
 using Xunit;
 
 namespace CalculatorTests
@@ -10,18 +12,18 @@ namespace CalculatorTests
         [Fact]
         public void SimpleConvertTest1()
         {
-            var infixExpression = new[]
+            var infixExpression = new MathExpression()
             {
-                new ExpressionElement(ElementType.Number, "1"),
-                new ExpressionElement(ElementType.Operator, "+"),
-                new ExpressionElement(ElementType.Number, "1")
+                new Number(1),
+                new Addition(),
+                new Number(1)
             };
 
-            var expectedPostfixExpression = new[]
+            var expectedPostfixExpression = new MathExpression()
             {
-                new ExpressionElement(ElementType.Number, "1"),
-                new ExpressionElement(ElementType.Number, "1"),
-                new ExpressionElement(ElementType.Operator, "+")
+                new Number(1),
+                new Number(1),
+                new Addition()
             };
 
             var converter = new InfixToPostfixConverter();
@@ -32,22 +34,22 @@ namespace CalculatorTests
         [Fact]
         public void SimpleConvertTest2()
         {
-            var infixExpression = new[]
+            var infixExpression = new MathExpression()
             {
-                new ExpressionElement(ElementType.Number, "1"),
-                new ExpressionElement(ElementType.Operator, "+"),
-                new ExpressionElement(ElementType.Number, "2"),
-                new ExpressionElement(ElementType.Operator, "+"),
-                new ExpressionElement(ElementType.Number, "3")
+                new Number(1),
+                new Addition(),
+                new Number(2), 
+                new Addition(),
+                new Number(3)
             };
 
-            var expectedPostfixExpression = new[]
+            var expectedPostfixExpression = new MathExpression()
             {
-                new ExpressionElement(ElementType.Number, "1"),
-                new ExpressionElement(ElementType.Number, "2"),
-                new ExpressionElement(ElementType.Operator, "+"),
-                new ExpressionElement(ElementType.Number, "3"),
-                new ExpressionElement(ElementType.Operator, "+")
+                new Number(1),
+                new Number(2),
+                new Addition(),
+                new Number(3),
+                new Addition()
             };
 
             var converter = new InfixToPostfixConverter();
@@ -58,22 +60,22 @@ namespace CalculatorTests
         [Fact]
         public void PriorityTest1()
         {
-            var infixExpression = new[]
+            var infixExpression = new MathExpression()
             {
-                new ExpressionElement(ElementType.Number, "1"),
-                new ExpressionElement(ElementType.Operator, "+"),
-                new ExpressionElement(ElementType.Number, "2"),
-                new ExpressionElement(ElementType.Operator, "*"),
-                new ExpressionElement(ElementType.Number, "3")
+                new Number(1),
+                new Addition(),
+                new Number(2), 
+                new Multiplication(),
+                new Number(3)
             };
 
-            var expectedPostfixExpression = new[]
+            var expectedPostfixExpression = new MathExpression()
             {
-                new ExpressionElement(ElementType.Number, "2"),
-                new ExpressionElement(ElementType.Number, "3"),
-                new ExpressionElement(ElementType.Operator, "*"),
-                new ExpressionElement(ElementType.Number, "1"),
-                new ExpressionElement(ElementType.Operator, "+")
+                new Number(2),
+                new Number(3),
+                new Multiplication(),
+                new Number(1),
+                new Addition(),
             };
 
             var converter = new InfixToPostfixConverter();

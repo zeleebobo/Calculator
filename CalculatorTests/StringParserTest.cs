@@ -1,5 +1,7 @@
 ﻿using Xunit;
 using Calculator;
+using Calculator.ExpressionElements;
+using Calculator.ExpressionElements.Operators;
 using Calculator.Parser;
 
 namespace CalculatorTests
@@ -10,11 +12,11 @@ namespace CalculatorTests
         public void SimpleParsing1()
         {
             var inputString = "1 + 2";
-            var expectedExpression = new[]
+            var expectedExpression = new MathExpression()
             {
-                new ExpressionElement(ElementType.Number, "1"),
-                new ExpressionElement(ElementType.Operator, "+"),
-                new ExpressionElement(ElementType.Number, "2")
+                new Number(1),
+                new Addition(),
+                new Number(2)
             };
 
             var parser = new StringParser();
@@ -26,13 +28,13 @@ namespace CalculatorTests
         public void SimpleParsing2()
         {
             var inputString = "1 + 2 + 3";
-            var expectedExpression = new[]
+            var expectedExpression = new MathExpression()
             {
-                new ExpressionElement(ElementType.Number, "1"),
-                new ExpressionElement(ElementType.Operator, "+"),
-                new ExpressionElement(ElementType.Number, "2"),
-                new ExpressionElement(ElementType.Operator, "+"),
-                new ExpressionElement(ElementType.Number, "3")
+                new Number(1),
+                new Addition(),
+                new Number(2),
+                new Addition(),
+                new Number(3)
             };
             
             var parser = new StringParser();
