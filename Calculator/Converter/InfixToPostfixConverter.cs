@@ -5,7 +5,7 @@ namespace Calculator.Converter
 {
     public class InfixToPostfixConverter : INotationConverter
     {
-        public IEnumerable<ExpressionElement> Convert(IEnumerable<ExpressionElement> expressionElements)
+        public MathExpression Convert(MathExpression convertingExpression)
         {
             throw new System.NotImplementedException();
         }

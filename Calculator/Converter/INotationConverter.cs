@@ -5,6 +5,6 @@ namespace Calculator.Converter
 {
     public interface INotationConverter
     {
-        IEnumerable<ExpressionElement> Convert(IEnumerable<ExpressionElement> expressionElements);
+        MathExpression Convert(MathExpression convertingExpression);
     }
 }

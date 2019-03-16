@@ -4,7 +4,7 @@ namespace Calculator.Parser
 {
     public class StringParser : ICalcParser
     {
-        public IEnumerable<ExpressionElement> ParseElements(string input)
+        public MathExpression ParseElements(string input)
         {
             throw new System.NotImplementedException();
         }

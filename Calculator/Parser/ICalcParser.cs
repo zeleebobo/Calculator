@@ -4,6 +4,6 @@ namespace Calculator.Parser
 {
     public interface ICalcParser
     {
-        IEnumerable<ExpressionElement> ParseElements(string input);
+        MathExpression ParseElements(string input);
     }
 }

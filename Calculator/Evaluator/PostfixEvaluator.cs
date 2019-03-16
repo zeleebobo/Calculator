@@ -13,9 +13,9 @@ namespace Calculator.Evaluator
             this.notationConverter = notationConverter;
         }
         
-        public double Evaluate(IEnumerable<ExpressionElement> expressionElements)
+        public double Evaluate(MathExpression expression)
         {
-            var postfixExpression = notationConverter.Convert(expressionElements);
+            var postfixExpression = notationConverter.Convert(expression);
             
             throw new System.NotImplementedException();
         }

@@ -5,6 +5,6 @@ namespace Calculator.Evaluator
 {
     public interface IEvaluator
     {
-        double Evaluate(IEnumerable<ExpressionElement> expressionElements);
+        double Evaluate(MathExpression expression);
     }
 }
