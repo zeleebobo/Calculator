@@ -15,8 +15,8 @@ namespace CalculatorTests
         public void SuccessCalculates(string input, double expected)
         {
             var calc = new Calculator.Calculator(new StringParser(), 
-                                                 new PostfixEvaluator(
-                                                     new InfixToPostfixConverter()));
+                                                 new InfixToPostfixConverter(),
+                                                 new PostfixEvaluator());
             var result = calc.Calculate(input);
             
             Assert.Equal(expected, result, 5);

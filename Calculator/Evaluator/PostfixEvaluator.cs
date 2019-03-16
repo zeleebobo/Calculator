@@ -1,22 +1,14 @@
 ﻿using System.Collections.Generic;
 using Calculator.Converter;
+using Calculator.ExpressionElements;
 using Calculator.Parser;
 
 namespace Calculator.Evaluator
 {
     public class PostfixEvaluator : IEvaluator
     {
-        private readonly INotationConverter notationConverter;
-        
-        public PostfixEvaluator(INotationConverter notationConverter)
+        public Number Evaluate(MathExpression expression)
         {
-            this.notationConverter = notationConverter;
-        }
-        
-        public double Evaluate(MathExpression expression)
-        {
-            var postfixExpression = notationConverter.Convert(expression);
-            
             throw new System.NotImplementedException();
         }
     }
