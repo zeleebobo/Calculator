@@ -9,7 +9,7 @@ namespace Calculator.Evaluator
     {
         public Number Evaluate(MathExpression expression)
         {
-            var elementsStack = new Stack<ExpressionElement>();
+            var elementsStack = new Stack<Number>();
 
             foreach (var expressionElement in expression)
             {
@@ -19,13 +19,13 @@ namespace Calculator.Evaluator
                 }
                 else if (expressionElement is Operator expressionOperator)
                 {
-                    var operand2 = elementsStack.Pop() as Number;
-                    var operand1 = elementsStack.Pop() as Number;
+                    var operand2 = elementsStack.Pop();
+                    var operand1 = elementsStack.Pop();
                     elementsStack.Push(expressionOperator.Evaluate(operand1, operand2));
                 }
                 else if (expressionElement is Function expressionFunction)
                 {
-                    var parameter = elementsStack.Pop() as Number;
+                    var parameter = elementsStack.Pop();
                     elementsStack.Push(expressionFunction.Evaluate(parameter));
                 }
                 else
