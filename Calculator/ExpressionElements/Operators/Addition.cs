@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Transactions;
 
 namespace Calculator.ExpressionElements.Operators
@@ -6,10 +6,11 @@ namespace Calculator.ExpressionElements.Operators
     [StringDefinition("+")]
     public class Addition : Operator
     {
-        public override int Priority => 3;
+        public override int Priority => 2;
         public override Number Evaluate(Number firstOperand, Number secondOperand)
         {
-            return new Number(firstOperand.Value + secondOperand.Value);
+            var result = firstOperand.Value + secondOperand.Value;
+            return new Number(result);
         }
     }
 }
