@@ -2,6 +2,7 @@
 
 namespace Calculator.ExpressionElements.Operators
 {
+    [StringDefinition("*")]
     public class Multiplication : Operator
     {
         public override int Priority => 2;

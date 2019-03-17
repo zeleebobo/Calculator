@@ -1,7 +1,9 @@
-﻿using System.Transactions;
+using System;
+using System.Transactions;
 
 namespace Calculator.ExpressionElements.Operators
 {
+    [StringDefinition("+")]
     public class Addition : Operator
     {
         public override int Priority => 3;
