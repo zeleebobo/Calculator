@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Calculator.ExpressionElements;
-using Calculator.Parser;
 
 namespace Calculator.Converter
 {
@@ -16,33 +15,41 @@ namespace Calculator.Converter
             {
                 switch (expressionElement)
                 {
-                    case Number _:
-                        postfixExpression.Add(expressionElement);
+                    case Number number:
+                        postfixExpression.Add(number);
                         break;
-                    case Operator _:
-                    case Function _:
+                    
+                    case Function currentFunction:
+                        bufferStack.Push(currentFunction);
+                        break;
+                    
+                    case Operator currentOperator:
                         if (bufferStack.Count == 0 || bufferStack.Peek() is OpenBracket)
                         {
-                            bufferStack.Push(expressionElement);
+                            bufferStack.Push(currentOperator);
                         }
-                        else if (expressionElement is Function || 
-                                 (bufferStack.Peek() as Operator).Priority > (expressionElement as Operator).Priority)
+                        else if (bufferStack.Peek() is Operator peekOperator &&
+                                 peekOperator.Priority < currentOperator.Priority)
                         {
-                            bufferStack.Push(expressionElement);
+                            bufferStack.Push(currentOperator);
                         }
-                        else
+                        else // if peek is function or is high priority operation then pops values from stack to expression
                         {
-                            while (!(bufferStack.Peek() is OpenBracket) ||
-                                   (bufferStack.Peek() as Operator).Priority < (expressionElement as Operator).Priority)
+                            while (bufferStack.Count != 0 && 
+                                   (bufferStack.Peek() is Function || 
+                                    bufferStack.Peek() is Operator anotherPeekOperator && 
+                                   anotherPeekOperator.Priority > currentOperator.Priority))
                             {
                                 postfixExpression.Add(bufferStack.Pop());
                             }
-                            bufferStack.Push(expressionElement);
+                            bufferStack.Push(currentOperator);
                         }
                         break;
+                    
                     case OpenBracket _:
                         bufferStack.Push(expressionElement);
                         break;  
+                    
                     case CloseBracket _:
                         while (!(bufferStack.Peek() is OpenBracket))
                         {
