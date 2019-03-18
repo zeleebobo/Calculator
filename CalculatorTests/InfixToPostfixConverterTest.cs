@@ -2,6 +2,7 @@
 using Calculator.Converter;
 using Calculator;
 using Calculator.ExpressionElements;
+using Calculator.ExpressionElements.Functions;
 using Calculator.ExpressionElements.Operators;
 using Xunit;
 
@@ -39,7 +40,7 @@ namespace CalculatorTests
                 new Number(1),
                 new Addition(),
                 new Number(2), 
-                new Addition(),
+                new Subtraction(),
                 new Number(3)
             };
 
@@ -47,8 +48,8 @@ namespace CalculatorTests
             {
                 new Number(1),
                 new Number(2),
-                new Addition(),
                 new Number(3),
+                new Subtraction(),
                 new Addition()
             };
 
@@ -71,11 +72,63 @@ namespace CalculatorTests
 
             var expectedPostfixExpression = new MathExpression()
             {
+                new Number(1),
                 new Number(2),
                 new Number(3),
                 new Multiplication(),
-                new Number(1),
                 new Addition(),
+            };
+
+            var converter = new InfixToPostfixConverter();
+            var actualPostfixExpression = converter.Convert(infixExpression);
+            Assert.Equal(expectedPostfixExpression, actualPostfixExpression);
+        }
+
+        [Fact]
+        public void FullTest1()
+        {
+            var infixExpression = new MathExpression()
+            {
+                new Cosine(),
+                new OpenBracket(),
+                new Number(3),
+                new Addition(),
+                new Number(4), 
+                new CloseBracket(),
+                new Multiplication(),
+                new Sine(),
+                new OpenBracket(),
+                new Number(8),
+                new Division(),
+                new Number(5),
+                new CloseBracket(),
+                new Subtraction(),
+                new Number(4),
+                new Multiplication(),
+                new OpenBracket(),
+                new Number(3),
+                new Subtraction(),
+                new Number(2),
+                new CloseBracket()
+            };
+
+            var expectedPostfixExpression = new MathExpression()
+            {
+                new Number(3),
+                new Number(4),
+                new Addition(),
+                new Cosine(),
+                new Number(8),
+                new Number(5),
+                new Division(),
+                new Sine(),
+                new Multiplication(),
+                new Number(4),
+                new Number(3),
+                new Number(2),
+                new Subtraction(),
+                new Multiplication(),
+                new Subtraction()
             };
 
             var converter = new InfixToPostfixConverter();
