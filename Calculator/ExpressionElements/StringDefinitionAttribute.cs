@@ -1,6 +1,6 @@
 using System;
 
-namespace Calculator
+namespace Calculator.ExpressionElements
 {
     public class StringDefinitionAttribute : Attribute
     {
