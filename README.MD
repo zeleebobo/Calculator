@@ -3,7 +3,7 @@
 Calculator evaluates expression by converting [Infix](https://en.wikipedia.org/wiki/Infix_notation) notation to [Postfix](https://en.wikipedia.org/wiki/Reverse_Polish_notation).
 
 Calculator has several types of expression elements:
-+ number (1 .. 9)
++ number (float with point)
 + constant (PI, E)
 + operator (+, -, *, /)
 + function (sin, cos)
