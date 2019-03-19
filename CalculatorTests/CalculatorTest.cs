@@ -20,7 +20,7 @@ namespace CalculatorTests
             var calc = new Calculator.Calculator(new StringParser(), 
                                                  new InfixToPostfixConverter(),
                                                  new PostfixEvaluator());
-            var result = calc.Calculate(input);
+            var result = calc.Calculate(input).Value;
             
             Assert.Equal(expected, result, 5);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Calculator.Converter;
 using Calculator.Evaluator;
 using Calculator.Parser;
@@ -23,15 +24,32 @@ namespace Calculator
             
         }
 
-        public double Calculate(string input)
+        public CalculationResult Calculate(string input)
         {
-            var expression = parser.ParseElements(input);
-            if (converter != null)
+            CalculationResult calculationResult;
+            try
             {
-                expression = converter.Convert(expression);
+                var expression = parser.ParseElements(input);
+                if (converter != null)
+                {
+                    expression = converter.Convert(expression);
+                }
+
+                var evaluationResult = evaluator.Evaluate(expression);
+
+                calculationResult = new CalculationResult(evaluationResult.Value);
             }
-            var result = evaluator.Evaluate(expression);
-            return result.Value;
+            catch (InvalidExpressionException e)
+            {
+                calculationResult = new CalculationResult(e);
+            }
+            catch (FormatException e)
+            {
+                calculationResult = new CalculationResult(e);
+            }
+            
+            
+            return calculationResult;
         }
     }
 }
