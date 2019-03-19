@@ -15,7 +15,10 @@ Calculator has several types of expression elements:
 
 `Attention`: Current realization of parser can parse only elements between which exists whitespace.
 
-`Example`: cos ( 1 + 2) / 3
+## Example: 
+```
+cos ( 1.5 + 1.5) / 3
+```
 
 # Extension 
 
