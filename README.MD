@@ -17,7 +17,7 @@ Calculator has several types of expression elements:
 
 ## Example: 
 ```
-cos ( 1.5 + 1.5) / 3
+cos ( 1.5 + 1.5 ) / 3
 ```
 
 # Extension 
