@@ -9,6 +9,9 @@ namespace Calculator.Evaluator
     {
         public Number Evaluate(MathExpression expression)
         {
+            if (expression.Count == 0)
+                throw new InvalidExpressionException("Empty expression");
+            
             var elementsStack = new Stack<Number>();
 
             foreach (var expressionElement in expression)
