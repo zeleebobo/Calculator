@@ -34,7 +34,7 @@ namespace Calculator.Parser
                 }
                 else
                 {
-                    throw new FormatException("String definition of element not found in registered elements");
+                    throw new FormatException($"String definition of element \"{stringElement}\" not found in registered elements");
                 }
             }
 
