@@ -19,6 +19,8 @@ namespace Calculator.Parser
             var expression = new MathExpression();
             foreach (var stringElement in input.Split(' '))
             {
+                if (string.IsNullOrWhiteSpace(stringElement))
+                    continue;
                 var lowerElement = stringElement.ToLower();
                 var isNumber = double.TryParse(stringElement, NumberStyles.AllowDecimalPoint,
                     CultureInfo.InvariantCulture, out var number);
