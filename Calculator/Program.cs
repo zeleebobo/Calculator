@@ -24,7 +24,7 @@ namespace Calculator
                 var inputLine = Console.ReadLine();
                 var result = calculator.Calculate(inputLine);
             
-                Console.WriteLine(result);
+                Console.WriteLine($"{result}\n");
             }
         }
     }
