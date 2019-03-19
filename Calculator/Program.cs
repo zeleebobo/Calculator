@@ -17,10 +17,15 @@ namespace Calculator
             var calculator = new Calculator(new StringParser(), 
                                             new InfixToPostfixConverter(), 
                                             new PostfixEvaluator());
-            var inputLine = Console.ReadLine();
-            var result = calculator.Calculate(inputLine);
+            Console.WriteLine("To exit press Ctrl + C");
+            while (true)
+            {
+                Console.Write("Expression: ");
+                var inputLine = Console.ReadLine();
+                var result = calculator.Calculate(inputLine);
             
-            Console.WriteLine($"Result: {result.ToString(CultureInfo.InvariantCulture)}");
+                Console.WriteLine(result);
+            }
         }
     }
 }
