@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using Calculator.Converter;
 using Calculator;
 using Calculator.ExpressionElements;
@@ -134,6 +135,21 @@ namespace CalculatorTests
             var converter = new InfixToPostfixConverter();
             var actualPostfixExpression = converter.Convert(infixExpression);
             Assert.Equal(expectedPostfixExpression, actualPostfixExpression);
+        }
+
+        [Fact]
+        void ValidationTest1()
+        {
+            var converter = new InfixToPostfixConverter();
+            var expression = new MathExpression()
+            {
+                new Addition(), 
+                new Number(2)
+            };
+
+            var ex = Assert.Throws<InvalidExpressionException>(() => converter.Convert(expression));
+            
+            Assert.Equal("Expression cannot starts with operator", ex.Message);
         }
     }
 }
