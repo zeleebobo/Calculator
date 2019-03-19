@@ -1,13 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using Calculator.ExpressionElements;
 
 namespace Calculator.Converter
 {
     public class InfixToPostfixConverter : INotationConverter
     {
+        private void ValidateInfixExpression(MathExpression expression)
+        {
+            if (expression.First() is Operator)
+                throw new InvalidExpressionException("Expression cannot starts with operator");
+            if (expression.Last() is Operator || expression.Last() is Function)
+                throw new InvalidExpressionException("Expression cannot ends with function or operator");
+            
+            var openedBrackets = 0;
+            for (var i = 0; i < expression.Count; i++)
+            {
+                var expressionElement = expression[i];
+                if (i > 0 && i < expression.Count - 1)
+                    expressionElement.Validate(expression[i - 1], expression[i + 1]);
+                
+                if (expressionElement is OpenBracket)
+                    openedBrackets++;
+                else if (expressionElement is CloseBracket)
+                    openedBrackets--;
+            }
+            if (openedBrackets > 0)
+                throw new InvalidExpressionException("Not closed opening bracket");
+            if (openedBrackets < 0)
+                throw new InvalidExpressionException("Not opened closing bracket");
+        }
+        
         public MathExpression Convert(MathExpression convertingExpression)
         {
+            ValidateInfixExpression(convertingExpression);
+            
             var postfixExpression = new MathExpression();
             var bufferStack = new Stack<ExpressionElement>();
             
