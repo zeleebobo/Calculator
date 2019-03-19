@@ -10,8 +10,12 @@ namespace Calculator.Converter
     {
         private void ValidateInfixExpression(MathExpression expression)
         {
+            if (expression.Count == 0)
+                throw new InvalidExpressionException("Empty expression");
+            
             if (expression.First() is Operator)
                 throw new InvalidExpressionException("Expression cannot starts with operator");
+            
             if (expression.Last() is Operator || expression.Last() is Function)
                 throw new InvalidExpressionException("Expression cannot ends with function or operator");
             
